@@ -1,0 +1,17 @@
+This is a mechanism to ensure resource is close, cleanup properly when no longer used.
+
+with resource_class(init_param) as obj:
+    # working with resource ...
+
+with_as block will automatic cleanup the thing before exit by calling obj.__exit__() function.
+
+class template for context manager:
+class resource_class():
+    def __init__(self, init_param)
+        #do init
+
+    def __enter__(self)
+        return #return the resource obj
+
+    def def __exit__(self, exc_type, exc_value, exc_traceback):
+        #do cleanup

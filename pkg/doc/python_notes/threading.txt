@@ -1,0 +1,12 @@
+1) Two kind of thread: 
+    regular : this thread has to self terminating, becareful with endless loop which cause the thread unstoppable 
+    deamon  : be killed whenever process want to finish.
+
+default is regular, choose deamon by specify "daemon=True" in threading.Thread()
+
+EX: 
+x = threading.Thread(target=thread_function, args=(...), daemon=True)
+x.start()
+
+2) join()
+Tell current thread to wait for the x.join() thread to finish.
