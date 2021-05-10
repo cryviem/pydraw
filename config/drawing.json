@@ -1,0 +1,11 @@
+{
+    "speed" : {
+        "min" : 5.0,
+        "max" : 60.0,
+        "default" : 20.0
+    },
+
+    "accelerate" : {
+        "default" : 800.0
+    }
+}

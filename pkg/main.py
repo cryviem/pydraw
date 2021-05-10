@@ -1,6 +1,8 @@
 import sys, os
 from pkg.logger import initLog, log
 from pkg.gcode import gcode_parse
+from pkg.draw import draw, draw_test
+from pkg.uart import com, createUart
 
 # Entry function
 def app():
@@ -10,39 +12,21 @@ def app():
     if len(args) == 0:
         log.error('no command')    
     else:
+        d = draw()
+        createUart()
         command, args = args[0], args[1:]
         if command == 'help':
             showHelp()
-        if command == 'gcode':
-            try:
-                normal_work(args[0])
+        elif command == 'gcode':
+            try:          
+                d.exeGcode(args[0])
             except:
                 log.error('gcode: missing file path') 
+
+        elif command == 'test':
+            com.send('abcd')
         else:
             log.info("unknown command!")
-
-
-
-def normal_work(gcodePath):
-    try:
-        with open(gcodePath, 'r') as gcodeHdr:
-            #--- whole logic inside ---
-            line_num = 0
-            for line in gcodeHdr:     
-                line_num += 1
-                # strip out space, \n characters
-                line=line.strip()
-                if not line or line.startswith('#'):
-                    # ignore on empty or comment lines
-                    continue
-
-                log.info(str(line_num) + ' ' + line)
-                gcode_parse(line)
-
-    except Exception as e:
-        log.error(e)
-    finally:
-        log.info('normal_work terminated')
 
 
 def intro():
