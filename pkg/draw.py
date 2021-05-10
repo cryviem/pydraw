@@ -40,14 +40,26 @@ class draw:
     def showProperties(self):
         log.info('cur_x %f cur_y %f cur_speed %f', self.cur_x, self.cur_y, self.cur_speed)
 
-    def drawLine(self, x, y):
+    def calcDistance(self, x, y):
         if self.is_absolute:
             dx = x - self.cur_x
-            dy = y - self.cur_y
+            dy = y - self.cur_y 
         else:
             dx = x
             dy - y
+        return dx, dy
 
+    def updateCurPos(self, x, y):
+        if self.is_absolute:
+            self.cur_x = x
+            self.cur_y = y
+        else:
+            self.cur_x += x
+            self.cur_y += y
+        return dx, dy
+
+    def drawLine(self, x, y):
+        dx, dy = self.calcDistance(x, y)
         pathLength = hypot(dx, dy)
         
 
@@ -103,5 +115,5 @@ def draw_test():
     pass
 
 
-    
+
 

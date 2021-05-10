@@ -3,7 +3,6 @@ from serial.tools.list_ports import comports
 from pkg.logger import log
 
 VID_CP210X = 4292
-com = 0
 
 class uart:
     def __init__(self):
@@ -21,10 +20,4 @@ class uart:
     def receive(self):
         return self.hdr.readline().decode('utf-8').strip()
 
-def createUart():
-    global com
-    try:    
-        com = uart()
-    except Exception as e:
-        log.error(e)
 
