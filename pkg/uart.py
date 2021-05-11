@@ -14,7 +14,7 @@ class uart:
         else:
             raise Exception('COM port not found')
 
-    def send(self, data):
+    def sendCmd(self, cmd,data):
         self.hdr.write(data.encode('utf-8'))
 
     def receive(self):

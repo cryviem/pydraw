@@ -12,6 +12,7 @@ def loadSetting(jsonPath):
         setting = json.load(js)
         log.info('Drawing setting %s', setting)
 
+
 class draw:
     def __init__(self):
         self.cur_x = 0.0
@@ -19,6 +20,7 @@ class draw:
         loadSetting('./config/drawing.json')
         self.cur_speed = setting.get('speed').get('default')
         self.is_absolute = True
+        self.com = uart()
 
     def updateSpeed(self, mmpm):
         mmps = mmpm / 60
